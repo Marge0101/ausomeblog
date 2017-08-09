@@ -59,5 +59,6 @@ end
 
 group :production do
   gem 'pg' #postgrade
+  gem 'rails_12factor', ' 0.0.3'
 end
 
