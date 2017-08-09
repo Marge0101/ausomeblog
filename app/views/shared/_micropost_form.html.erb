@@ -1,0 +1,21 @@
+<%=form_for (@micropost) do |f| %>
+
+  <%= render 'shared/error_messages', object: f.object %>
+  
+  <div class="field">
+    <%= f.text_area :content, placeholder:"compose new micro post…" %>
+  </div>
+  <%= f.submit "post" , class: "ban ban-primary "%>
+  <span class="picture">
+    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+    </span>
+<% end %>
+
+<!--画像のエラーの時だけに出てくる文言-->
+<script type="text/javascript"> 
+$('#micropost_picture').bind('change',function() {
+  var size_in_megabytes=this.files[0].size/1024/1024;
+  if (size_in_megabytes > 5){
+    alert('Masimum file size is 5MB.Please choose a smaller file.');}
+});
+</script>
