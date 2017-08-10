@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :remember_token,:activation_token
+  attr_accessor :remember_token,:activation_token,:reset_token
   before_save :downcase_email
   before_create :create_activation_digest
   has_many :microposts,dependent: :destroy
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   #   BCrypt::Password.new(remember_digest).is_password?(remember_token)
   # end
   
-  def authenicated?(attribute,token)
+  def authenticated?(attribute,token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
@@ -93,8 +93,33 @@ class User < ActiveRecord::Base
     following. include?(other_user)
   end
   
+  #Account activation
+  #Activates an account
+  def activated
+    update_attribute(:activated, true)
+    update_attribute(:activaed_at, Time.zone.now)
+end
+
+  #Sends activativation mail.
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
   
-  
+  #PW reset
+  #Sets the PW reset attributes.
+  def create_reset_digest
+    self.reset_token =User.new_token
+    update_attribute(:reset_digest, User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+end
+
+def send_password_reset_email
+  UserMailer.password_reset(self).deliver_now
+end
+
+def password_reset_expired?
+  reset_sent_at<2.hours.ago
+end
   private
 
   #Convert email to all over-case.
