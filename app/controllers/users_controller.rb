@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     # redirect_to @user
     
     #Try 2　（メールでアクティベートを確認するバージョン）
-    #UserMailer.account_activation(@user).deliver_now
+    UserMailer.account_activation(@user).deliver_now
 
       # @user.send_activation_email #SEDING
       flash[:info]= "Please check your email to activate your account."
