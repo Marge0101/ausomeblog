@@ -1,45 +1,37 @@
 <% provide(:title, "Home") %>
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= yield(:title) %> | Awesome Blog</title>
-  </head>
-  <body>
-    <%if logged_in? %>
-      <div class="row">
-        <aside class= "col-mid-4">
-          <section class="user_info">
-            <%= render 'shared/user_info'%>
-          </section> 
-          
-          <section class="stats">
-            <%= render 'shared/stats'%>
-          </section> 
-          
-           <section class= "micropost_form">
-            <%= render 'shared/micropost_form' %>
-          </section>
-        </aside>
-      </div>
+<head>
+<title><%= yield(:title) %> | Awesome Blog</title>
+</head>
+<body>
+  <%if logged_in? %>
+    <div class="row">
+      <aside class= "col-mid-4">
+        <section class="user_info">
+          <%= render 'shared/user_info'%>
+        </section> 
+        <section class="stats">
+          <%= render 'shared/stats'%>
+        </section> 
+        <section class= "micropost_form">
+          <%= render 'shared/micropost_form' %>
+        </section>
+      </aside>
       <div class="col-mid-8">
-        <h3>Micropost Feed</h3>
-        <%=render 'shared/feed'%>
-        </div>
-  
-    <% else %>
-      
-      <div class="container">
-        <div class="center jumbotron">
-          <h1>Awesome Blog App</h1> 
-          <p>This is the home page for Awesome Blog.</p> 
-          <%= link_to "Sign up now!",signup_path,class:"btn btn-lg btn-primary" %>
-        </div>
-        <p>This is some text.</p> 
-        <p>This is another text.</p> 
-      </div>
-      
-      <%= link_to image_tag("kredo-logo.gif",alt:"Kredo Logo"),'http://kredo.jp/'%>
-
-      <% end %>
-  </body>
+      <h3>Micropost Feed</h3>
+      <%=render 'shared/feed'%>
+    </div>
+    </div>
+  <% else %>
+    <div class="center jumbotron">
+      <h1>Welcome to Awesome Blog App</h1> 
+      <h2>This is the home page for the 
+      Awesome Blog.
+      </h2> 
+      <%= link_to image_tag("Mari.jpg",alt:"Mari_Sato"),'#'%>
+      <%= link_to "Sign up now!",signup_path,class:"btn btn-lg btn-primary" %>
+    </div>
+  <% end %>
+</body>
 </html>

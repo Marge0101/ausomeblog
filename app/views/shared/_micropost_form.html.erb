@@ -1,16 +1,13 @@
 <%=form_for (@micropost) do |f| %>
-
   <%= render 'shared/error_messages', object: f.object %>
-  
   <div class="field">
-    <%= f.text_area :content, placeholder:"compose new micro post…" %>
+      <%= f.text_area :content, placeholder:"compose new micro post…" %>
   </div>
   <%= f.submit "post" , class: "ban ban-primary "%>
   <span class="picture">
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-    </span>
+  </span>
 <% end %>
-
 <!--画像のエラーの時だけに出てくる文言-->
 <script type="text/javascript"> 
 $('#micropost_picture').bind('change',function() {
