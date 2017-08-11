@@ -76,15 +76,12 @@ class User < ActiveRecord::Base
   def follow(other_user )
     # following << other_user
     active_relationships.create(followed_id: other_user.id)
-    
-    
   end
 
   # Unfollows a user.
   def unfollow(other_user )
     # following.delete(other_user)
     active_relationships.find_by(followed_id: other_user.id).destroy
-    
   end
 
   # Returns true if the current user is following the other user.
@@ -98,7 +95,7 @@ class User < ActiveRecord::Base
   def activated
     update_attribute(:activated, true)
     update_attribute(:activaed_at, Time.zone.now)
-end
+  end
 
   #Sends activativation mail.
   def send_activation_email
@@ -111,15 +108,16 @@ end
     self.reset_token =User.new_token
     update_attribute(:reset_digest, User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
-end
+  end
 
-def send_password_reset_email
-  UserMailer.password_reset(self).deliver_now
-end
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
 
-def password_reset_expired?
-  reset_sent_at<2.hours.ago
-end
+  def password_reset_expired?
+    reset_sent_at<2.hours.ago
+  end
+  
   private
 
   #Convert email to all over-case.
