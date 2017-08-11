@@ -92,10 +92,10 @@ class User < ActiveRecord::Base
   
   #Account activation
   #Activates an account
-  def activated
-    update_attribute(:activated, true)
-    update_attribute(:activaed_at, Time.zone.now)
-  end
+  # def activated
+  #   update_attribute(:activated, true)
+  #   update_attribute(:activaed_at, Time.zone.now)
+  # end
 
   #Sends activativation mail.
   def send_activation_email

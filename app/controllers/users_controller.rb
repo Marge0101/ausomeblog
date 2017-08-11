@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   
   def show
     @user= User.find(params[:id])
-    @microposts =@user.microposts.paginate(page:params[:page])
+    @microposts =@user.microposts.paginate(page: params[:page])
   end
   
   def create
@@ -28,9 +28,9 @@ class UsersController < ApplicationController
     # redirect_to @user
     
     #Try 2　（メールでアクティベートを確認するバージョン）
-    UserMailer.account_activation(@user).deliver_now
+    # UserMailer.account_activation(@user).deliver_now
 
-      # @user.send_activation_email #SEDING
+      @user.send_activation_email #SEDING
       flash[:info]= "Please check your email to activate your account."
       redirect_to root_url
 
