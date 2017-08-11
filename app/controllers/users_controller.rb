@@ -27,8 +27,8 @@ class UsersController < ApplicationController
     #   flash[:success] = "Welcome to the Awesome Blog App!"
     # redirect_to @user
     
-     #Try 2　（メールでアクティベートを確認するバージョン）
-    UserMailer.account_activation(@user).deliver_now
+    #Try 2　（メールでアクティベートを確認するバージョン）
+    #UserMailer.account_activation(@user).deliver_now
 
       # @user.send_activation_email #SEDING
       flash[:info]= "Please check your email to activate your account."
